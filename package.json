@@ -1,0 +1,50 @@
+{
+  "name": "required-labels-action",
+  "version": "0.0.0",
+  "description": "A GitHub Actions that automated label checking for pull requests",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava --serial --verbose",
+    "pack": "ncc build index.ts -o dist -m"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sugarshin/required-labels-action.git"
+  },
+  "keywords": [
+    "GitHub",
+    "Actions",
+    "JavaScript"
+  ],
+  "author": "sugarshin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sugarshin/required-labels-action/issues"
+  },
+  "homepage": "https://github.com/sugarshin/required-labels-action#readme",
+  "ava": {
+    "files": [
+      "**/*.test.ts"
+    ],
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "esm",
+      "ts-node/register"
+    ]
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.2"
+  },
+  "devDependencies": {
+    "@ava/typescript": "1.1.1",
+    "@types/node": "12.12.6",
+    "@zeit/ncc": "0.21.1",
+    "ava": "3.3.0",
+    "eslint": "6.8.0",
+    "esm": "3.2.25",
+    "ts-node": "8.6.2",
+    "typescript": "3.7.5"
+  }
+}

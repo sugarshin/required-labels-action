@@ -1,0 +1,15 @@
+name: 'Check labels'
+description: 'Automated label checking for Pull requests'
+inputs:
+  requiredAny:
+    description: 'At least one of these comma separated labels should be present on all Pull requests'
+    required: false
+  requiredAll:
+    description: 'All of these comma separated labels must be present on all Pull requests'
+    required: false
+  banned:
+    description: 'None of these comma separated labels can be present on all Pull requests'
+    required: false
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

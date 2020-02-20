@@ -1,0 +1,12 @@
+{
+  "pull_request": {
+    "labels": [
+      {
+        "name": "foo"
+      },
+      {
+        "name": "bar"
+      }
+    ]
+  }
+}
