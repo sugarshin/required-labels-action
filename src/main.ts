@@ -57,7 +57,7 @@ export async function run(): Promise<void> {
 
     if (requiredAll) {
       const requiredAllLabels = uniq<string>(requiredAll.split(',').filter(l => l));
-      if (prLabelNames.length === 0 || !prLabelNames.every(l => requiredAllLabels.includes(l))) {
+      if (prLabelNames.length === 0 || !requiredAllLabels.every(l => prLabelNames.includes(l))) {
         throw new Error(`required label must be all of \`${requiredAll}\``);
       }
     }
