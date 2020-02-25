@@ -4,15 +4,13 @@ on:
   pull_request:
     paths:
       - '.github/**'
+      - 'src/**'
       - 'test/**'
       - .eslintrc.js
       - .node-version
-      - index.ts
-      - main.ts
       - package-lock.json
       - package.json
       - tsconfig.json
-      - utils.ts
 
 jobs:
   unit-test-and-lint:
