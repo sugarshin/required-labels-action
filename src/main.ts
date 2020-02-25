@@ -19,9 +19,9 @@ type GitHubEvent = {
 
 export async function run(): Promise<void> {
   try {
-    const requiredAny = core.getInput('requiredAny');
-    const requiredAll = core.getInput('requiredAll');
-    const requiredOneof = core.getInput('requiredOneof');
+    const requiredAny = core.getInput('required_any');
+    const requiredAll = core.getInput('required_all');
+    const requiredOneof = core.getInput('required_oneof');
     const banned = core.getInput('banned');
 
     if (!requiredAny && !requiredAll && !requiredOneof && !banned) {
@@ -48,7 +48,7 @@ export async function run(): Promise<void> {
     if (requiredOneof) {
       const requiredOneofLabels = uniq<string>(requiredOneof.split(',').filter(l => l));
       if (requiredOneofLabels.length < 2) {
-        throw new Error('required set at least two labels to use `requiredOneof`');
+        throw new Error('required set at least two labels to use `required_oneof`');
       }
       if (!includesOneof(requiredOneofLabels, prLabelNames)) {
         throw new Error(`required label one of \`${requiredOneof}\``);
