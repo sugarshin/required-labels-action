@@ -16,5 +16,5 @@ jobs:
       - run: npm run pack
       - uses: ./
         with: 
-          requiredAll: 'approved'
-          requiredOneof: 'patch,minor,major'
+          required_all: 'approved'
+          required_oneof: 'patch,minor,major'

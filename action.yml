@@ -1,13 +1,13 @@
 name: 'Check labels'
 description: 'Automated label checking for Pull requests'
 inputs:
-  requiredAny:
+  required_any:
     description: 'At least one of these comma separated labels should be present on all Pull requests'
     required: false
-  requiredAll:
+  required_all:
     description: 'All of these comma separated labels must be present on all Pull requests'
     required: false
-  requiredOneof:
+  required_oneof:
     description: 'At only one of these comma separated labels should be present on all Pull requests'
     required: false
   banned:

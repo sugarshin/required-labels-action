@@ -4,22 +4,22 @@ import test from 'ava';
 
 const ip = path.join(process.cwd(), 'src/index.ts');
 
-test('INPUT_REQUIREDANY: expect to pass if labeled by `requiredAny` included in GitHub event labels', t => {
-  process.env.INPUT_REQUIREDANY = 'foo';
+test('INPUT_REQUIRED_ANY: expect to pass if labeled by `required_any` included in GitHub event labels', t => {
+  process.env.INPUT_REQUIRED_ANY = 'foo';
   process.env.GITHUB_EVENT_PATH = path.join(__dirname, 'fixture/event.json');
   const actual = cp.execSync(`ts-node ${ip}`).toString();
   t.is(actual.trim(), 'ok!')
 });
 
-test('INPUT_REQUIREDONEOF: expect to pass if one of labeled by `requiredOneof` included in GitHub event labels', t => {
-  process.env.INPUT_REQUIREDONEOF = 'bar,buz';
+test('INPUT_REQUIRED_ONEOF: expect to pass if one of labeled by `required_oneof` included in GitHub event labels', t => {
+  process.env.INPUT_REQUIRED_ONEOF = 'bar,buz';
   process.env.GITHUB_EVENT_PATH = path.join(__dirname, 'fixture/event.json');
   const actual = cp.execSync(`ts-node ${ip}`).toString();
   t.is(actual.trim(), 'ok!')
 });
 
-test('INPUT_REQUIREDALL: expect to pass if labeled by `requiredAll` included in GitHub event labels', t => {
-  process.env.INPUT_REQUIREDALL = 'foo,bar';
+test('INPUT_REQUIRED_ALL: expect to pass if labeled by `required_all` included in GitHub event labels', t => {
+  process.env.INPUT_REQUIRED_ALL = 'foo,bar';
   process.env.GITHUB_EVENT_PATH = path.join(__dirname, 'fixture/event.json');
   const actual = cp.execSync(`ts-node ${ip}`).toString();
   t.is(actual.trim(), 'ok!')
