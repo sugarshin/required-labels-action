@@ -1,0 +1,28 @@
+name: Lint and Unit Test
+
+on:
+  pull_request:
+    paths:
+      - '.github/**'
+      - 'test/**'
+      - .eslintrc.js
+      - .node-version
+      - index.ts
+      - main.ts
+      - package-lock.json
+      - package.json
+      - tsconfig.json
+      - utils.ts
+
+jobs:
+  unit-test-and-lint:
+    name: Lint and Test
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test

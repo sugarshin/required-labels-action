@@ -1,22 +1,19 @@
-name: "build-test"
+name: Test
+
 on:
   pull_request:
-  push:
-    branches:
-      - master
+    types: [opened, synchronize, labeled, unlabeled, reopened]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  check-label:
+    runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v1
-    - run: |
-        npm ci
-        npm run build
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: ./
-      with: 
-        hoge: foo,bar
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: npm ci
+      - run: npm run pack
+      - uses: ./
+        with: 
+          requiredAll: 'approved'
