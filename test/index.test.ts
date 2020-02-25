@@ -2,7 +2,7 @@ import * as cp from 'child_process';
 import * as path from 'path';
 import test from 'ava';
 
-const ip = path.join(process.cwd(), 'index.ts');
+const ip = path.join(process.cwd(), 'src/index.ts');
 
 test('INPUT_REQUIREDANY: expect to pass if labeled by `requiredAny` included in GitHub event labels', t => {
   process.env.INPUT_REQUIREDANY = 'foo';

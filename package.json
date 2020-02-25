@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "ava --serial --verbose",
-    "pack": "ncc build index.ts -o dist -m",
+    "pack": "ncc build src/index.ts -o dist -m",
     "lint": "eslint './**/*.ts'"  
   },
   "repository": {
