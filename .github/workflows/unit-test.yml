@@ -15,7 +15,7 @@ on:
       - utils.ts
 
 jobs:
-  test:
+  unit-test-and-lint:
     name: Lint and Test
     runs-on: ubuntu-latest
     steps:
@@ -23,9 +23,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - name: Install dependencies
-        run: npm ci
-      - name: Lint
-        run: npm run lint
-      - name: Test
-        run: npm test
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test

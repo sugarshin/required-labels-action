@@ -2,13 +2,15 @@ name: Test
 
 on:
   pull_request:
-    types: [opened, labeled, unlabeled, reopened]
+    types: [opened, synchronize, labeled, unlabeled, reopened]
 
 jobs:
-  build:
+  check-label:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: ./
-      with: 
-        requiredAll: 'approved'
+      - uses: actions/checkout@v1
+      - run: npm ci
+      - run: npm run pack
+      - uses: ./
+        with: 
+          requiredAll: 'approved'
