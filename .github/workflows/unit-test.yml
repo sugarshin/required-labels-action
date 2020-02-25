@@ -1,4 +1,4 @@
-name: Unit Test
+name: Lint and Unit Test
 
 on:
   pull_request:

@@ -29,6 +29,7 @@ export async function run(): Promise<void> {
     }
 
     const { GITHUB_EVENT_PATH } = process.env;
+
     if (!GITHUB_EVENT_PATH) {
       throw new Error('`GITHUB_EVENT_PATH` must be required');
     }
@@ -45,7 +46,7 @@ export async function run(): Promise<void> {
 
     if (requiredAll) {
       const requiredAllLabels = uniq<string>(requiredAll.split(',').filter(l => l));
-      if (!prLabelNames.every(l => requiredAllLabels.includes(l))) {
+      if (prLabelNames.length === 0 || !prLabelNames.every(l => requiredAllLabels.includes(l))) {
         throw new Error(`required label must be all of ${requiredAll}`);
       }
     }
