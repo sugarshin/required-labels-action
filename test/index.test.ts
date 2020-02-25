@@ -11,6 +11,13 @@ test('INPUT_REQUIREDANY: expect to pass if labeled by `requiredAny` included in 
   t.is(actual.trim(), 'ok!')
 });
 
+test('INPUT_REQUIREDONEOF: expect to pass if one of labeled by `requiredOneof` included in GitHub event labels', t => {
+  process.env.INPUT_REQUIREDONEOF = 'bar,buz';
+  process.env.GITHUB_EVENT_PATH = path.join(__dirname, 'fixture/event.json');
+  const actual = cp.execSync(`ts-node ${ip}`).toString();
+  t.is(actual.trim(), 'ok!')
+});
+
 test('INPUT_REQUIREDALL: expect to pass if labeled by `requiredAll` included in GitHub event labels', t => {
   process.env.INPUT_REQUIREDALL = 'foo,bar';
   process.env.GITHUB_EVENT_PATH = path.join(__dirname, 'fixture/event.json');

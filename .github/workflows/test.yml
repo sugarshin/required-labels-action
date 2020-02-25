@@ -17,3 +17,4 @@ jobs:
       - uses: ./
         with: 
           requiredAll: 'approved'
+          requiredOneof: 'patch,minor,major'
