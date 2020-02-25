@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    name: Pre Release
+    name: Release
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v1
