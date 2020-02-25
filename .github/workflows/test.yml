@@ -1,18 +1,14 @@
-name: Build and Test
+name: Test
 
 on:
   pull_request:
-  push:
-    branches:
-      - master
+    types: [opened, labeled, unlabeled, reopened]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - run: npm ci
-    - run: npm run pack
     - uses: ./
       with: 
         requiredAll: 'approved'

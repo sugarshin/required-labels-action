@@ -40,21 +40,21 @@ export async function run(): Promise<void> {
     if (requiredAny) {
       const requiredAnyLabels = uniq<string>(requiredAny.split(',').filter(l => l));
       if (!prLabelNames.some(l => requiredAnyLabels.includes(l))) {
-        throw new Error(`required label at least one of ${requiredAny}`);
+        throw new Error(`required label at least one of \`${requiredAny}\``);
       }
     }
 
     if (requiredAll) {
       const requiredAllLabels = uniq<string>(requiredAll.split(',').filter(l => l));
       if (prLabelNames.length === 0 || !prLabelNames.every(l => requiredAllLabels.includes(l))) {
-        throw new Error(`required label must be all of ${requiredAll}`);
+        throw new Error(`required label must be all of \`${requiredAll}\``);
       }
     }
 
     if (banned) {
       const bannedLabels = uniq<string>(banned.split(',').filter(l => l));
       if (prLabelNames.some(l => bannedLabels.includes(l))) {
-        throw new Error(`${requiredAll} must be unlabelled`);
+        throw new Error(`${banned} must be unlabelled`);
       }
     }
 
