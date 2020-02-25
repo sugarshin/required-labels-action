@@ -25,8 +25,7 @@ TBD
 name: Test
 
 on:
-  pull_request:
-    types: [opened, synchronize, labeled, unlabeled, reopened]
+  pull_request
 
 jobs:
   check-label:
