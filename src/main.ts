@@ -1,5 +1,5 @@
 import * as core from '@actions/core';
-import { uniq } from './utils';
+import { uniq, includesOneof } from './utils';
 
 type LabelsItem = {
   color: string;
@@ -21,9 +21,10 @@ export async function run(): Promise<void> {
   try {
     const requiredAny = core.getInput('requiredAny');
     const requiredAll = core.getInput('requiredAll');
+    const requiredOneof = core.getInput('requiredOneof');
     const banned = core.getInput('banned');
 
-    if (!requiredAny && !requiredAll && !banned) {
+    if (!requiredAny && !requiredAll && !requiredOneof && !banned) {
       console.log('nothing labels to check');
       process.exit(0);
     }
@@ -41,6 +42,16 @@ export async function run(): Promise<void> {
       const requiredAnyLabels = uniq<string>(requiredAny.split(',').filter(l => l));
       if (!prLabelNames.some(l => requiredAnyLabels.includes(l))) {
         throw new Error(`required label at least one of \`${requiredAny}\``);
+      }
+    }
+
+    if (requiredOneof) {
+      const requiredOneofLabels = uniq<string>(requiredOneof.split(',').filter(l => l));
+      if (requiredOneofLabels.length < 2) {
+        throw new Error('required set at least two labels to use `requiredOneof`');
+      }
+      if (!includesOneof(requiredOneofLabels, prLabelNames)) {
+        throw new Error(`required label one of \`${requiredOneof}\``);
       }
     }
 
