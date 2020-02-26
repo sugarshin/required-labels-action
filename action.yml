@@ -1,6 +1,9 @@
 name: 'Check labels'
 description: 'Automated label checking for Pull requests'
 inputs:
+  github_token:
+    description: 'GitHub access token to use GitHub API'
+    required: true
   required_any:
     description: 'At least one of these comma separated labels should be present on all Pull requests'
     required: false
