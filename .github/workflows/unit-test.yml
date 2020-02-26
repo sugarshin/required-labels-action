@@ -31,8 +31,5 @@ jobs:
             ${{ runner.os }}-
       - run: npm ci
       - run: npm run lint
-      - name: npm test
-        run: npm test
-        env:
-          INPUT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm test
       - run: npm run pack

@@ -1,43 +1,36 @@
-import * as fs from 'fs';
-import * as core from '@actions/core';
-import { GitHub, context } from '@actions/github';
+import { getInput, setOutput, setFailed } from '@actions/core';
+import { context } from '@actions/github';
 import { uniq, includesOneof } from './utils';
+
+type LabelsItem = {
+  color: string;
+  default: boolean;
+  description: string;
+  id: number;
+  name: string;
+  node_id: string;
+  url: string;
+}
 
 export async function run(): Promise<void> {
   try {
-    const requiredAny = core.getInput('required_any', { required: false });
-    const requiredAll = core.getInput('required_all', { required: false });
-    const requiredOneof = core.getInput('required_oneof', { required: false });
-    const banned = core.getInput('banned', { required: false });
+    const requiredAny = getInput('required_any', { required: false });
+    const requiredAll = getInput('required_all', { required: false });
+    const requiredOneof = getInput('required_oneof', { required: false });
+    const banned = getInput('banned', { required: false });
 
     if (!requiredAny && !requiredAll && !requiredOneof && !banned) {
       console.log('nothing labels to check');
       process.exit(0);
     }
 
-    const { GITHUB_EVENT_PATH } = process.env;
-    if (!GITHUB_EVENT_PATH) {
-      throw new Error('`GITHUB_EVENT_PATH` must be required');
+    const { pull_request: pullRequest } = context.payload;
+    if (!pullRequest || !pullRequest.labels) {
+      throw new Error('there is no `pull_request.labels` in event data');
     }
 
-    const token = core.getInput('github_token', { required: true });
-    const client = new GitHub(token);
-
-    const event = JSON.parse(
-      fs.readFileSync(GITHUB_EVENT_PATH, 'utf8')
-    ) as { pull_request?: { number?: number }};
-
-    if (!event.pull_request || !event.pull_request.number) {
-      throw new Error('there is no pull request data in event');
-    }
-
-    const { data: pullRequest } = await client.pulls.get({
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      pull_number: event.pull_request.number, // eslint-disable-line @typescript-eslint/camelcase
-    });
-
-    const prLabelNames = pullRequest.labels.map(l => l.name);
+    const labels: LabelsItem[] = pullRequest.labels;
+    const prLabelNames = labels.map(l => l.name);
 
     if (requiredAny) {
       const requiredAnyLabels = uniq<string>(requiredAny.split(',').filter(l => l));
@@ -70,8 +63,8 @@ export async function run(): Promise<void> {
       }
     }
 
-    console.log('ok!');
+    setOutput('required_labels', 'ok');
   } catch (error) {
-    core.setFailed(error.message);
+    setFailed(error.message);
   }
 }

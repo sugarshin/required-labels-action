@@ -1,5 +1,12 @@
 {
   "pull_request": {
-    "number": 1
+    "labels": [
+      {
+        "name": "foo"
+      },
+      {
+        "name": "bar"
+      }
+    ]
   }
 }
