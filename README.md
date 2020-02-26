@@ -32,7 +32,7 @@ jobs:
   check-label:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: sugarshin/required-labels-action@0.1
         with:
           required_all: 'approved'

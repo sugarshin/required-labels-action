@@ -3,17 +3,17 @@ name: Test
 on:
   pull_request:
     types: [opened, synchronize, labeled, unlabeled, reopened]
+    paths:
+      - '.github/**'
+      - action.yml
+      - 'dist/**'
+      - package.json
 
 jobs:
   check-label:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-      - run: npm ci
-      - run: npm run pack
+      - uses: actions/checkout@v2
       - uses: ./
         with:
           required_all: 'approved'
