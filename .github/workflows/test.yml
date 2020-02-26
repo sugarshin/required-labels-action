@@ -2,7 +2,7 @@ name: Test
 
 on:
   pull_request:
-    types: [opened, synchronize, labeled, unlabeled, reopened]
+    types: [opened, labeled, unlabeled, reopened]
     paths:
       - '.github/**'
       - action.yml
