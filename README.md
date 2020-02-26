@@ -17,7 +17,9 @@ A GitHub Actions that automated label checking for pull requests.
 
 ### Outputs
 
-TBD
+|Parameter|Value|
+|:--:|:--|
+|required_labels|ok|
 
 ## Example Workflow
 
@@ -33,7 +35,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - uses: sugarshin/required-labels-action@v0.2.0
+      - uses: sugarshin/required-labels-action@v0.3.0
         with:
           required_all: 'approved'
           required_oneof: 'patch,minor,major'
