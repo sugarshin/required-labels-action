@@ -63,7 +63,7 @@ export async function run(): Promise<void> {
       }
     }
 
-    setOutput('required_labels', 'ok!');
+    setOutput('required_labels', 'ok');
   } catch (error) {
     setFailed(error.message);
   }
