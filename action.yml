@@ -1,5 +1,6 @@
-name: 'Check labels'
-description: 'Automated label checking for Pull requests'
+name: 'Label Checker'
+author: 'Shingo Sato <shinsugar@gmail.com>'
+description: 'Automated labels checking for Pull requests'
 inputs:
   required_any:
     description: 'At least one of these comma separated labels should be present on all Pull requests'
@@ -16,3 +17,6 @@ inputs:
 runs:
   using: 'node12'
   main: 'dist/index.js'
+branding:
+  icon: 'check'
+  color: 'green'
