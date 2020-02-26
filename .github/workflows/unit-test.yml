@@ -3,23 +3,33 @@ name: Lint and Unit Test
 on:
   pull_request:
     paths:
-      - '.github/**'
-      - 'src/**'
-      - 'test/**'
       - .eslintrc.js
-      - .node-version
+      - '.github/**'
       - package-lock.json
       - package.json
+      - 'src/**'
+      - 'test/**'
       - tsconfig.json
 
 jobs:
   unit-test-and-lint:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: '12.16.1'
+      - uses: actions/cache@v1
+        env:
+          cache-name: cache-npm-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-${{ env.cache-name }}-
+            ${{ runner.os }}-npm-
+            ${{ runner.os }}-
       - run: npm ci
       - run: npm run lint
       - run: npm test
+      - run: npm run pack
