@@ -34,8 +34,7 @@ jobs:
   check-label:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: sugarshin/required-labels-action@v0.3.0
+      - uses: sugarshin/required-labels-action@v0.3.1
         with:
           required_all: 'approved'
           required_oneof: 'patch,minor,major'
