@@ -45,7 +45,7 @@
     "@types/node": "12.12.28",
     "@typescript-eslint/eslint-plugin": "2.21.0",
     "@typescript-eslint/parser": "2.21.0",
-    "@zeit/ncc": "0.21.1",
+    "@zeit/ncc": "0.22.2",
     "ava": "3.4.0",
     "eslint": "6.8.0",
     "esm": "3.2.25",
